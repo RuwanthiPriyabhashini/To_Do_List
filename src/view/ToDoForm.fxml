@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="468.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ToDoFormController">
+   <children>
+      <ListView prefHeight="443.0" prefWidth="400.0" />
+      <TextField layoutX="416.0" layoutY="51.0" prefHeight="38.0" prefWidth="369.0" />
+      <Button fx:id="btnDelete" layoutX="520.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #f40000;" text="Delete" textFill="#fcfcfc">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnUpdate" layoutX="654.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #19d11c;" text="Update" textFill="#fff8f8">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Line endX="272.5999755859375" layoutX="517.0" layoutY="148.0" startX="-100.0" stroke="#6b6767" />
+      <Button fx:id="btnAddNewToDo" layoutX="417.0" layoutY="161.0" mnemonicParsing="false" onAction="#btnAddNewToDoOnAction" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: #0e31f4;" text="+ Add New ToDo" textFill="#f4f4f4">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Pane layoutX="409.0" layoutY="214.0" prefHeight="148.0" prefWidth="384.0">
+         <children>
+            <TextField layoutX="14.0" layoutY="30.0" prefHeight="38.0" prefWidth="354.0" />
+            <Button fx:id="btnAddToList" layoutX="267.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnAddToListOnAction" style="-fx-background-color: #19d11c;" text="Add To List" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="btnLogOut" layoutX="409.0" layoutY="398.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" style="-fx-background-color: #19d11c;" text="&lt;&lt; Log Out" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="104.0" fitWidth="126.0" layoutX="640.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/pngaaa.com-450136.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="349.0" layoutY="448.0" text="Designed By: RuwiDss #1996">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

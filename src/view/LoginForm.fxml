@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="root" prefHeight="531.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+   <children>
+      <Label layoutX="145.0" layoutY="34.0" text="Login To To-Do List" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="39.0" layoutY="96.0" text="User Name">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="39.0" layoutY="131.0" prefHeight="40.0" prefWidth="406.0" promptText="Enter User Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="39.0" layoutY="204.0" text="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="39.0" layoutY="239.0" prefHeight="40.0" prefWidth="406.0" promptText="Enter Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnLogin" layoutX="144.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="30.0" prefWidth="174.0" style="-fx-background-color: #0e31f4;" text="Login" textFill="#fafafa">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="lblCreateNewAccount" layoutX="159.0" layoutY="371.0" onMouseClicked="#lblCreateNewAccountOnMouseClicked" text="Create New Account" textFill="#0e31f4" underline="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="191.0" layoutY="505.0" text="Designed By: RuwiDss #1996">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
