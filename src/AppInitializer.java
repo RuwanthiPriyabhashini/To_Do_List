@@ -20,7 +20,7 @@ public class AppInitializer extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Login Form");
         primaryStage.centerOnScreen();
-        primaryStage.show();
+        primaryStage.show(); 
 
     }
 }
