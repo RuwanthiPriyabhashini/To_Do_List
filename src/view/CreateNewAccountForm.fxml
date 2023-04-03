@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="lblUserId" prefHeight="584.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateNewAccountFormController">
+<AnchorPane fx:id="root" prefHeight="584.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateNewAccountFormController">
    <children>
       <Label layoutX="139.0" layoutY="36.0" prefHeight="26.0" prefWidth="186.0" text="Create New Account" textAlignment="CENTER" underline="true">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="lblUserName" layoutX="23.0" layoutY="148.0" text="User Name">
+      <Label layoutX="23.0" layoutY="148.0" text="User Name">
          <font>
             <Font size="16.0" />
          </font>
@@ -25,7 +25,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label fx:id="lblEmail" layoutX="23.0" layoutY="226.0" text="E-Mail">
+      <Label layoutX="23.0" layoutY="226.0" text="E-Mail">
          <font>
             <Font size="16.0" />
          </font>
@@ -35,12 +35,12 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label fx:id="lblNewPassword" layoutX="23.0" layoutY="307.0" text="New Password">
+      <Label layoutX="23.0" layoutY="307.0" text="New Password">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblConfirmPassword" layoutX="23.0" layoutY="384.0" text="Confirm Password">
+      <Label layoutX="23.0" layoutY="384.0" text="Confirm Password">
          <font>
             <Font size="16.0" />
          </font>
@@ -76,6 +76,20 @@
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <Label layoutX="309.0" layoutY="121.0" prefHeight="26.0" prefWidth="103.0" text="User Id" />
+      <Label fx:id="lblUserId" alignment="CENTER" contentDisplay="CENTER" layoutX="309.0" layoutY="121.0" prefHeight="26.0" prefWidth="103.0" text="User ID" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNewPassword" layoutX="290.0" layoutY="377.0" text="Password Does Not Matched" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblConfirmPassword" layoutX="290.0" layoutY="448.0" text="Password Does Not Matched" textFill="RED">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
