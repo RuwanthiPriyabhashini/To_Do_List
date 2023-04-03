@@ -11,12 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import tm.ToDoTM;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Optional;
 
 public class ToDoFormController {
@@ -30,6 +28,7 @@ public class ToDoFormController {
     public Pane pane;
     public TextField txtNewTodo;
     public AnchorPane root;
+    public ListView<ToDoTM> lstToDoList;
 
 
     public void initialize() {
@@ -60,6 +59,33 @@ public class ToDoFormController {
 
     public void btnAddToListOnAction(ActionEvent actionEvent) {
         String id = autoGenerateID();
+        String description = txtNewTodo.getText();
+        String userID = lblID.getText();
+
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into todos values(?,?,?)");
+
+           preparedStatement.setObject(1,id);
+           preparedStatement.setObject(2,description);
+           preparedStatement.setObject(3,userID);
+
+            int i = preparedStatement.executeUpdate();
+
+            if(i !=0){
+                new Alert(Alert.AlertType.CONFIRMATION,"ToDos Added Successfully...!").showAndWait();
+
+                
+
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something Wrong.. Try Again!").showAndWait();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -94,7 +120,17 @@ public class ToDoFormController {
                 String id = oldID.substring(1, length);
                 int intID = Integer.parseInt(id);
 
-                if()
+                intID = intID +1;
+
+                if(intID < 10){
+                    newID = "T00" + intID;
+                }
+                else if(intID <100){
+                    newID = "T0" + intID;
+                }
+                else {
+                    newID = "T" + intID;
+                }
 
             }else{
                 newID = "T001";
