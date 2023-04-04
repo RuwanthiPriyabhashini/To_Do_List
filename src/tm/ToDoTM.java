@@ -40,10 +40,6 @@ public class ToDoTM {
 
     @Override
     public String toString() {
-        return "ToDoTM{" +
-                "id='" + id + '\'' +
-                ", description='" + description + '\'' +
-                ", user_id='" + user_id + '\'' +
-                '}';
+        return description;
     }
 }

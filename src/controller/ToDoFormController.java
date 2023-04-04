@@ -2,6 +2,9 @@ package controller;
 
 import com.mysql.cj.PreparedQuery;
 import db.DBConnection;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +32,9 @@ public class ToDoFormController {
     public TextField txtNewTodo;
     public AnchorPane root;
     public ListView<ToDoTM> lstToDoList;
+    public TextField txtSelectedText;
+
+    public String id;
 
 
     public void initialize() {
@@ -36,6 +42,39 @@ public class ToDoFormController {
        lblWelcomeNote.setText("Hi " + LoginFormController.enteredUserName + " Welcome to ToDo List!");
 
        pane.setVisible(false);
+
+       btnDelete.setDisable(true);
+       btnUpdate.setDisable(true);
+       txtSelectedText.setDisable(true);
+       loadList();
+
+       lstToDoList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoTM>() {
+           @Override
+           public void changed(ObservableValue<? extends ToDoTM> observable, ToDoTM oldValue, ToDoTM newValue) {
+               btnDelete.setDisable(false);
+               btnUpdate.setDisable(false);
+               txtSelectedText.setDisable(false);
+
+               txtSelectedText.requestFocus();
+
+               pane.setVisible(false);
+
+               //ToDoTM selectedItem = lstToDoList.getSelectionModel().getSelectedItem();
+
+               if(newValue == null){
+                   return;
+               }
+               String description = newValue.getDescription();
+
+               txtSelectedText.setText(description);
+
+
+               id = newValue.getId();
+
+
+
+           }
+       });
    }
 
     public void btnLogOutOnAction(ActionEvent actionEvent) throws IOException {
@@ -87,13 +126,72 @@ public class ToDoFormController {
             e.printStackTrace();
         }
 
+        loadList();
+
 
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
+
+        String description = txtSelectedText.getText();
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update todos set description = ? where id =?");
+
+            preparedStatement.setObject(1,description);
+            preparedStatement.setObject(2,id);
+
+            preparedStatement.executeUpdate();
+
+            loadList();
+
+            txtSelectedText.clear();
+
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+            txtSelectedText.setDisable(true);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do You Want to Delete This ToDo?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+
+        if(buttonType.get().equals(ButtonType.YES)){
+
+            Connection connection = DBConnection.getInstance().getConnection();
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("delete from todos where id = ?");
+
+                preparedStatement.setObject(1,id);
+
+                preparedStatement.executeUpdate();
+
+                loadList();
+
+                txtSelectedText.clear();
+                btnDelete.setDisable(true);
+                btnUpdate.setDisable(true);
+                txtSelectedText.setDisable(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     public void btnAddNewToDoOnAction(ActionEvent actionEvent) {
@@ -101,6 +199,10 @@ public class ToDoFormController {
         pane.setVisible(true);
 
         txtNewTodo.requestFocus();
+
+        btnDelete.setDisable(true);
+        btnUpdate.setDisable(true);
+        txtSelectedText.setDisable(true);
     }
 
     public String autoGenerateID(){
@@ -143,5 +245,40 @@ public class ToDoFormController {
 
 
         return newID;
+    }
+
+    public void loadList(){
+
+        ObservableList<ToDoTM> todos = lstToDoList.getItems();
+        todos.clear();
+
+        Connection connection = DBConnection.getInstance().getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from todos where user_id = ?");
+
+            preparedStatement.setObject(1,LoginFormController.enteredUserID);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+
+                String id = resultSet.getString(1);
+                String description = resultSet.getString(2);
+                String user_id = resultSet.getString(3);
+
+                ToDoTM toDoTM =new ToDoTM(id, description, user_id);
+                todos.add(toDoTM);
+
+            }
+
+            lstToDoList.refresh();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

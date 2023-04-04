@@ -15,7 +15,7 @@
 <AnchorPane fx:id="root" prefHeight="468.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ToDoFormController">
    <children>
       <ListView fx:id="lstToDoList" prefHeight="443.0" prefWidth="400.0" />
-      <TextField layoutX="416.0" layoutY="51.0" prefHeight="38.0" prefWidth="369.0" />
+      <TextField fx:id="txtSelectedText" layoutX="416.0" layoutY="51.0" prefHeight="38.0" prefWidth="369.0" />
       <Button fx:id="btnDelete" layoutX="520.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #f40000;" text="Delete" textFill="#fcfcfc">
          <font>
             <Font size="14.0" />
