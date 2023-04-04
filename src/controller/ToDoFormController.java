@@ -102,6 +102,8 @@ public class ToDoFormController {
 
         if(txtNewTodo.getText().trim().isEmpty()){
             lblCheckText.setVisible(true);
+
+            txtNewTodo.requestFocus();
         }
         else{
             lblCheckText.setVisible(false);
