@@ -35,6 +35,7 @@ public class ToDoFormController {
     public TextField txtSelectedText;
 
     public String id;
+    public Label lblCheckText;
 
 
     public void initialize() {
@@ -42,6 +43,7 @@ public class ToDoFormController {
        lblWelcomeNote.setText("Hi " + LoginFormController.enteredUserName + " Welcome to ToDo List!");
 
        pane.setVisible(false);
+       lblCheckText.setVisible(false);
 
        btnDelete.setDisable(true);
        btnUpdate.setDisable(true);
@@ -97,36 +99,47 @@ public class ToDoFormController {
     }
 
     public void btnAddToListOnAction(ActionEvent actionEvent) {
-        String id = autoGenerateID();
-        String description = txtNewTodo.getText();
-        String userID = lblID.getText();
+
+        if(txtNewTodo.getText().trim().isEmpty()){
+            lblCheckText.setVisible(true);
+        }
+        else{
+            lblCheckText.setVisible(false);
+
+            String id = autoGenerateID();
+            String description = txtNewTodo.getText();
+            String userID = lblID.getText();
 
 
-        Connection connection = DBConnection.getInstance().getConnection();
+            Connection connection = DBConnection.getInstance().getConnection();
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into todos values(?,?,?)");
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("insert into todos values(?,?,?)");
 
-           preparedStatement.setObject(1,id);
-           preparedStatement.setObject(2,description);
-           preparedStatement.setObject(3,userID);
+                preparedStatement.setObject(1,id);
+                preparedStatement.setObject(2,description);
+                preparedStatement.setObject(3,userID);
 
-            int i = preparedStatement.executeUpdate();
+                int i = preparedStatement.executeUpdate();
 
-            if(i !=0){
-                new Alert(Alert.AlertType.CONFIRMATION,"ToDos Added Successfully...!").showAndWait();
+                if(i !=0){
+                    new Alert(Alert.AlertType.CONFIRMATION,"ToDos Added Successfully...!").showAndWait();
 
-                
 
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something Wrong.. Try Again!").showAndWait();
+
+                }else{
+                    new Alert(Alert.AlertType.ERROR,"Something Wrong.. Try Again!").showAndWait();
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            loadList();
+
+            txtNewTodo.clear();
         }
 
-        loadList();
 
 
     }

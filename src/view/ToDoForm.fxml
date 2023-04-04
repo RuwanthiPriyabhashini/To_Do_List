@@ -52,6 +52,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label fx:id="lblCheckText" layoutX="21.0" layoutY="75.0" text="Text Filed Can not be empty!" textFill="#d71111">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Button fx:id="btnLogOut" layoutX="409.0" layoutY="398.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" style="-fx-background-color: #19d11c;" text="&lt;&lt; Log Out" textFill="WHITE">
